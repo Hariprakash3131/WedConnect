@@ -299,3 +299,4 @@ export async function sendBookingConfirmedEmail(
     return { id: `mock-${Date.now()}` };
   }
 }
+
