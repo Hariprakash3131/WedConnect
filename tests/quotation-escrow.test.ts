@@ -114,3 +114,4 @@ describe("Quotation Financials & Escrow Lifecycle", () => {
     expect(isValidBookingTransition("completed", "in_progress")).toBe(false);
   });
 });
+

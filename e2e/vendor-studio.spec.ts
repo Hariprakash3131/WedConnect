@@ -33,3 +33,4 @@ test.describe("Vendor Studio & Specialist Suite Experience", () => {
     await expect(quoteTitle).toBeVisible();
   });
 });
+

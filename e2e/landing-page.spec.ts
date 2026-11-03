@@ -48,3 +48,4 @@ test.describe("Landing Page & Public Website Navigation", () => {
     await expect(page).toHaveURL(/.*\/contact/);
   });
 });
+

@@ -84,3 +84,4 @@ describe("Immutable Audit Log & Security Sanitize Controls", () => {
     expect(clean).toContain("&lt;img");
   });
 });
+

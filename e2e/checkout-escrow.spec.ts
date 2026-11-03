@@ -21,3 +21,4 @@ test.describe("Escrow Checkout & Milestone Payment Flow", () => {
     await expect(securityBadge.first()).toBeVisible();
   });
 });
+
