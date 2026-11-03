@@ -26,6 +26,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { UserNav } from "@/features/auth/components/user-nav";
+import { NotificationCenter } from "@/components/notifications/notification-center";
 import { cn } from "@/lib/utils";
 import { AnimatePresence, motion } from "framer-motion";
 
@@ -180,6 +181,8 @@ export default function VendorLayout({
                 <span>View Public Profile</span>
               </Button>
             </Link>
+
+            <NotificationCenter />
 
             <div className="md:hidden">
               <ThemeToggle />
