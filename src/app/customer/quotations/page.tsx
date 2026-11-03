@@ -189,16 +189,16 @@ export default function QuotationsPage() {
               <div className="pt-4 border-t border-border/60 space-y-2">
                 {quote.status === "sent" ? (
                   <div className="grid grid-cols-2 gap-2">
-                    <Button
-                      variant="gradient"
-                      size="sm"
-                      disabled={isProcessing === quote.id}
-                      onClick={() => handleAccept(quote.id)}
-                      className="font-bold text-xs rounded-xl"
-                    >
-                      <CheckCircle2 className="w-3.5 h-3.5 mr-1" />
-                      Accept Quote
-                    </Button>
+                    <Link href={`/checkout/${quote.id}`} className="block">
+                      <Button
+                        variant="gradient"
+                        size="sm"
+                        className="w-full font-bold text-xs rounded-xl"
+                      >
+                        <CheckCircle2 className="w-3.5 h-3.5 mr-1" />
+                        Accept & Escrow
+                      </Button>
+                    </Link>
 
                     <Button
                       variant="glass"
@@ -212,10 +212,12 @@ export default function QuotationsPage() {
                     </Button>
                   </div>
                 ) : quote.status === "accepted" ? (
-                  <div className="p-3 rounded-xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 text-xs font-bold text-center flex items-center justify-center gap-1.5">
-                    <CheckCircle2 className="w-4 h-4" />
-                    <span>Accepted • Milestone Booking Generated</span>
-                  </div>
+                  <Link href="/customer/bookings" className="block">
+                    <div className="p-3 rounded-xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 text-xs font-bold text-center flex items-center justify-center gap-1.5 hover:bg-emerald-500/20 transition-colors">
+                      <CheckCircle2 className="w-4 h-4" />
+                      <span>Accepted • View Booking Milestones &rarr;</span>
+                    </div>
+                  </Link>
                 ) : (
                   <div className="p-3 rounded-xl bg-muted text-muted-foreground text-xs font-semibold text-center">
                     Quotation Declined

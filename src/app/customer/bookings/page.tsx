@@ -111,6 +111,13 @@ export default function BookingsPage() {
               {/* Action Buttons */}
               <div className="pt-2 flex flex-wrap items-center justify-between gap-3 border-t border-border/60">
                 <div className="flex items-center gap-2">
+                  <Link href={`/customer/bookings/${booking.id}`}>
+                    <Button variant="default" size="sm" className="h-9 rounded-xl text-xs font-bold gap-1.5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-soft-sm">
+                      <Clock className="w-3.5 h-3.5" />
+                      <span>Timeline & Escrow</span>
+                    </Button>
+                  </Link>
+
                   <Button
                     variant="glass"
                     size="sm"
@@ -118,13 +125,13 @@ export default function BookingsPage() {
                     className="h-9 rounded-xl text-xs font-semibold gap-1.5"
                   >
                     <Download className="w-3.5 h-3.5" />
-                    <span>Download Agreement</span>
+                    <span>Agreement</span>
                   </Button>
 
                   <Link href={`/customer/chat`}>
                     <Button variant="glass" size="sm" className="h-9 rounded-xl text-xs font-semibold gap-1.5">
                       <MessageSquare className="w-3.5 h-3.5 text-primary" />
-                      <span>Message Vendor</span>
+                      <span>Chat</span>
                     </Button>
                   </Link>
                 </div>

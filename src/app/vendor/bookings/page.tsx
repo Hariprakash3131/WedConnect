@@ -206,6 +206,13 @@ export default function VendorBookingsPage() {
               </Link>
 
               <div className="flex items-center gap-2">
+                <Link href={`/vendor/bookings/${b.id}`}>
+                  <Button variant="default" size="sm" className="rounded-xl text-xs font-bold gap-1 bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-soft-sm">
+                    <Film className="w-3.5 h-3.5" />
+                    <span>Production Hub</span>
+                  </Button>
+                </Link>
+
                 <Button
                   variant="outline"
                   size="sm"
