@@ -353,3 +353,4 @@ export function RegisterForm() {
     </div>
   );
 }
+

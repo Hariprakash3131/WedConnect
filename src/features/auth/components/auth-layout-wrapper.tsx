@@ -112,3 +112,4 @@ export function AuthLayoutWrapper({ children, title, subtitle }: AuthLayoutWrapp
     </div>
   );
 }
+

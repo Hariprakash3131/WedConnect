@@ -67,3 +67,4 @@ export function SocialButtons({ redirectTo }: SocialButtonsProps) {
     </div>
   );
 }
+
