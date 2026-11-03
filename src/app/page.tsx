@@ -14,6 +14,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { UserNav } from "@/features/auth/components/user-nav";
 
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
@@ -64,9 +65,7 @@ export default function HomePage() {
           </div>
 
           <div className="flex items-center space-x-4">
-            <Badge variant="luxury" className="px-3.5 py-1 text-xs">
-              Phase 1: Project Setup Ready
-            </Badge>
+            <UserNav />
           </div>
         </div>
       </header>
