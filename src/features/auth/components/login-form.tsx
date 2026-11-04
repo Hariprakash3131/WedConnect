@@ -52,7 +52,16 @@ export function LoginForm() {
       }
 
       toast.success("Welcome back! Redirecting to your dashboard...");
-      const target = redirectParam || result.redirectUrl || "/customer/dashboard";
+      let target = result.redirectUrl || "/customer/dashboard";
+      if (redirectParam) {
+        if (target.startsWith("/customer") && (redirectParam.startsWith("/customer") || redirectParam.startsWith("/checkout"))) {
+          target = redirectParam;
+        } else if (target.startsWith("/vendor") && redirectParam.startsWith("/vendor")) {
+          target = redirectParam;
+        } else if (target.startsWith("/admin") && redirectParam.startsWith("/admin")) {
+          target = redirectParam;
+        }
+      }
       router.push(target);
       router.refresh();
     } catch {
@@ -159,6 +168,50 @@ export function LoginForm() {
           )}
         </Button>
       </form>
+
+      {/* Quick Demo Credentials Panel */}
+      <div className="p-3.5 rounded-2xl bg-muted/40 border border-border/80 space-y-2">
+        <div className="flex items-center justify-between">
+          <span className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground">
+            Quick 1-Click Role Login
+          </span>
+          <Link href="/auth/logout" className="text-[11px] font-semibold text-rose-500 hover:underline">
+            Clear Session
+          </Link>
+        </div>
+        <div className="grid grid-cols-3 gap-2">
+          <button
+            type="button"
+            onClick={() => {
+              setValue("email", "couple@wedconnect.app");
+              setValue("password", "Password123!");
+            }}
+            className="px-2.5 py-1.5 rounded-xl border border-border bg-card hover:bg-primary/10 hover:border-primary/40 text-[11px] font-bold text-foreground transition-all text-center"
+          >
+            Couple
+          </button>
+          <button
+            type="button"
+            onClick={() => {
+              setValue("email", "vendor@wedconnect.app");
+              setValue("password", "Password123!");
+            }}
+            className="px-2.5 py-1.5 rounded-xl border border-border bg-card hover:bg-purple-500/10 hover:border-purple-500/40 text-[11px] font-bold text-foreground transition-all text-center"
+          >
+            Vendor
+          </button>
+          <button
+            type="button"
+            onClick={() => {
+              setValue("email", "admin@wedconnect.app");
+              setValue("password", "Password123!");
+            }}
+            className="px-2.5 py-1.5 rounded-xl border border-border bg-card hover:bg-amber-500/10 hover:border-amber-500/40 text-[11px] font-bold text-foreground transition-all text-center"
+          >
+            Admin
+          </button>
+        </div>
+      </div>
 
       {/* Switch to Register */}
       <div className="text-center pt-2">

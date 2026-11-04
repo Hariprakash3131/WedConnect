@@ -145,3 +145,4 @@ jobs:
           NEXT_PUBLIC_SUPABASE_ANON_KEY: "mock-anon-key"
           SUPABASE_SERVICE_ROLE_KEY: "mock-service-key"
 ```
+

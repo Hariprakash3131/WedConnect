@@ -72,6 +72,13 @@ export async function middleware(request: NextRequest) {
     const defaultDashboard = ROLE_ROUTES[userRole] || ROLE_ROUTES.customer;
 
     if (isAuthPage) {
+      if (
+        request.nextUrl.searchParams.has("switch") ||
+        request.nextUrl.searchParams.has("new") ||
+        request.nextUrl.searchParams.has("logged_out")
+      ) {
+        return supabaseResponse;
+      }
       return NextResponse.redirect(new URL(defaultDashboard, request.url));
     }
 

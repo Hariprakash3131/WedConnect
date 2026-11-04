@@ -339,7 +339,7 @@ export function RegisterForm() {
       </form>
 
       {/* Switch to Sign In */}
-      <div className="text-center pt-2">
+      <div className="text-center pt-2 space-y-1">
         <p className="text-sm text-muted-foreground">
           Already registered?{" "}
           <Link
@@ -347,6 +347,15 @@ export function RegisterForm() {
             className="font-semibold text-primary hover:underline underline-offset-4"
           >
             Sign in
+          </Link>
+        </p>
+        <p className="text-xs text-muted-foreground">
+          Need to switch user?{" "}
+          <Link
+            href="/auth/logout"
+            className="font-semibold text-rose-500 hover:underline"
+          >
+            Clear current session
           </Link>
         </p>
       </div>

@@ -1,6 +1,7 @@
 "use server";
 
 import { createClient } from "@/lib/supabase/server";
+import { createAdminClient } from "@/lib/supabase/admin";
 import {
   loginSchema,
   registerSchema,
@@ -118,35 +119,49 @@ export async function registerAction(input: RegisterInput): Promise<AuthActionRe
       };
     }
 
-    // If user is a vendor, initialize the vendor_profiles row
-    if (role === "vendor" && businessName) {
-      const vendorSlug = `${slugify(businessName)}-${Math.random().toString(36).substring(2, 7)}`;
-      
-      const { error: vendorProfileError } = await supabase.from("vendor_profiles").insert({
-        user_id: authData.user.id,
-        business_name: businessName,
-        slug: vendorSlug,
-        city: "New York", // Default city placeholder, updated on onboarding
-        country: "US",
-        verification_status: "pending",
-      });
+    // Auto-confirm user email and ensure public.profiles row has correct role
+    if (process.env.SUPABASE_SERVICE_ROLE_KEY && !process.env.SUPABASE_SERVICE_ROLE_KEY.includes("placeholder")) {
+      try {
+        const adminClient = createAdminClient();
+        await adminClient.auth.admin.updateUserById(authData.user.id, {
+          email_confirm: true,
+        });
 
-      if (vendorProfileError) {
-        console.error("Vendor profile initialization error:", vendorProfileError);
+        await adminClient.from("profiles").upsert({
+          id: authData.user.id,
+          email: email.toLowerCase(),
+          full_name: fullName,
+          role: role,
+          status: "active",
+        }, { onConflict: "id" });
+      } catch (err) {
+        console.warn("Auto-confirm / profile sync notice:", err);
       }
     }
 
-    // Check if email confirmation is required by Supabase settings
-    const requiresVerification = authData.session === null;
-
-    if (requiresVerification) {
-      return {
-        success: true,
-        requiresVerification: true,
-        message: "Registration successful! Please check your email to verify your account.",
-        redirectUrl: `/auth/verify-email?email=${encodeURIComponent(email)}`,
-      };
+    // If user is a vendor, initialize the vendor_profiles row
+    if (role === "vendor" && businessName) {
+      const vendorSlug = `${slugify(businessName)}-${Math.random().toString(36).substring(2, 7)}`;
+      try {
+        const adminClient = createAdminClient();
+        await adminClient.from("vendor_profiles").upsert({
+          user_id: authData.user.id,
+          business_name: businessName,
+          slug: vendorSlug,
+          city: "Mumbai",
+          country: "IN",
+          verification_status: "pending",
+        }, { onConflict: "user_id" });
+      } catch (err) {
+        console.error("Vendor profile initialization error:", err);
+      }
     }
+
+    // Automatically sign in the newly registered user to create active session cookies
+    await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
 
     const redirectUrl = ROLE_ROUTES[role] || ROLE_ROUTES.customer;
     return {

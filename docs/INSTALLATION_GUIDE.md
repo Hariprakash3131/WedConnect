@@ -107,3 +107,4 @@ npm test
 # 3. Test production build compilation
 npm run build
 ```
+

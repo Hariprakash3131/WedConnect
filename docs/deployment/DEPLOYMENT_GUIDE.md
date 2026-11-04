@@ -127,3 +127,4 @@ Execute the following smoke tests on production to confirm total health:
 
 ### Issue: Supabase Auth Session not persisting across routes
 **Resolution**: Ensure `NEXT_PUBLIC_SITE_URL` matches the exact domain and that the Supabase Redirect URL whitelist includes `https://wedconnect.app/auth/callback` in **Supabase > Authentication > URL Configuration**.
+
