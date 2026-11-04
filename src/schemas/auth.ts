@@ -30,7 +30,7 @@ export const registerSchema = z
       .regex(/[A-Z]/, "Password must contain at least one uppercase letter")
       .regex(/[0-9]/, "Password must contain at least one number"),
     confirmPassword: z.string().min(1, "Please confirm your password"),
-    role: z.enum(["customer", "vendor"], {
+    role: z.enum(["customer", "vendor", "admin"], {
       required_error: "Please select an account type",
     }),
     businessName: z.string().optional(),

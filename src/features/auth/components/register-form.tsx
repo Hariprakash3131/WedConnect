@@ -97,14 +97,14 @@ export function RegisterForm() {
     <div className="space-y-6">
       {/* Role Switcher Cards */}
       <div className="space-y-2">
-        <Label>I want to join as</Label>
-        <div className="grid grid-cols-2 gap-3">
+        <Label>Select Account Type</Label>
+        <div className="grid grid-cols-3 gap-2 sm:gap-3">
           {/* Customer Option */}
           <button
             type="button"
             onClick={() => setValue("role", "customer")}
             className={cn(
-              "flex flex-col items-center justify-center p-4 rounded-2xl border text-center transition-all duration-200",
+              "flex flex-col items-center justify-center p-3 rounded-2xl border text-center transition-all duration-200",
               selectedRole === "customer"
                 ? "border-primary bg-primary/5 text-primary shadow-soft-sm ring-2 ring-primary/20"
                 : "border-border/80 bg-background/50 text-muted-foreground hover:bg-muted/40"
@@ -112,14 +112,14 @@ export function RegisterForm() {
           >
             <div
               className={cn(
-                "w-10 h-10 rounded-xl flex items-center justify-center mb-2 transition-colors",
+                "w-9 h-9 rounded-xl flex items-center justify-center mb-1.5 transition-colors",
                 selectedRole === "customer" ? "bg-primary text-white" : "bg-muted text-muted-foreground"
               )}
             >
-              <Heart className="w-5 h-5 fill-current" />
+              <Heart className="w-4 h-4 fill-current" />
             </div>
-            <span className="font-semibold text-sm text-foreground">Customer / Couple</span>
-            <span className="text-xs text-muted-foreground mt-0.5">Planning an event</span>
+            <span className="font-bold text-xs text-foreground">Customer</span>
+            <span className="text-[10px] text-muted-foreground mt-0.5">Couple / Event</span>
           </button>
 
           {/* Vendor Option */}
@@ -127,22 +127,45 @@ export function RegisterForm() {
             type="button"
             onClick={() => setValue("role", "vendor")}
             className={cn(
-              "flex flex-col items-center justify-center p-4 rounded-2xl border text-center transition-all duration-200",
+              "flex flex-col items-center justify-center p-3 rounded-2xl border text-center transition-all duration-200",
               selectedRole === "vendor"
-                ? "border-secondary bg-secondary/5 text-secondary shadow-soft-sm ring-2 ring-secondary/20"
+                ? "border-purple-600 bg-purple-500/5 text-purple-600 shadow-soft-sm ring-2 ring-purple-500/20"
                 : "border-border/80 bg-background/50 text-muted-foreground hover:bg-muted/40"
             )}
           >
             <div
               className={cn(
-                "w-10 h-10 rounded-xl flex items-center justify-center mb-2 transition-colors",
-                selectedRole === "vendor" ? "bg-secondary text-white" : "bg-muted text-muted-foreground"
+                "w-9 h-9 rounded-xl flex items-center justify-center mb-1.5 transition-colors",
+                selectedRole === "vendor" ? "bg-purple-600 text-white" : "bg-muted text-muted-foreground"
               )}
             >
-              <Briefcase className="w-5 h-5" />
+              <Briefcase className="w-4 h-4" />
             </div>
-            <span className="font-semibold text-sm text-foreground">Vendor / Pro</span>
-            <span className="text-xs text-muted-foreground mt-0.5">Grow business & quotes</span>
+            <span className="font-bold text-xs text-foreground">Vendor</span>
+            <span className="text-[10px] text-muted-foreground mt-0.5">Specialist / Pro</span>
+          </button>
+
+          {/* Admin Option */}
+          <button
+            type="button"
+            onClick={() => setValue("role", "admin")}
+            className={cn(
+              "flex flex-col items-center justify-center p-3 rounded-2xl border text-center transition-all duration-200",
+              selectedRole === "admin"
+                ? "border-amber-500 bg-amber-500/5 text-amber-600 shadow-soft-sm ring-2 ring-amber-500/20"
+                : "border-border/80 bg-background/50 text-muted-foreground hover:bg-muted/40"
+            )}
+          >
+            <div
+              className={cn(
+                "w-9 h-9 rounded-xl flex items-center justify-center mb-1.5 transition-colors",
+                selectedRole === "admin" ? "bg-amber-500 text-white" : "bg-muted text-muted-foreground"
+              )}
+            >
+              <CheckCircle2 className="w-4 h-4" />
+            </div>
+            <span className="font-bold text-xs text-foreground">Admin</span>
+            <span className="text-[10px] text-muted-foreground mt-0.5">Management</span>
           </button>
         </div>
       </div>
@@ -333,7 +356,7 @@ export function RegisterForm() {
               Creating your account...
             </>
           ) : (
-            `Create ${selectedRole === "vendor" ? "Vendor" : "Customer"} Account`
+            `Create ${selectedRole === "vendor" ? "Vendor" : selectedRole === "admin" ? "Admin" : "Customer"} Account`
           )}
         </Button>
       </form>

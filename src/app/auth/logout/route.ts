@@ -8,3 +8,4 @@ export async function GET(request: Request) {
   const url = new URL("/auth/login?logged_out=true", request.url);
   return NextResponse.redirect(url);
 }
+
