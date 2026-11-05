@@ -138,9 +138,7 @@ CREATE TABLE IF NOT EXISTS public.event_types (
 
 CREATE INDEX IF NOT EXISTS idx_event_types_slug ON public.event_types(slug);
 
--- ====================================================================
--- 4. VENDOR PROFILES
--- ====================================================================
+
 
 CREATE TABLE IF NOT EXISTS public.vendor_profiles (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
